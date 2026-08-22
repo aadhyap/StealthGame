@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ctmq6e3e7ki2u"]
+
+[ext_resource type="Script" uid="uid://e7caj6ovdxdj" path="res://player.gd" id="1_ig7tw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
+size = Vector3(30, 0.2, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
+size = Vector3(30, 0.2, 30)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h2yge"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0xm2m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lquwl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.8784314, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1bvp3"]
+
+[node name="main" type="Node3D" unique_id=1844334951]
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=408971249]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1284691544]
+material_override = SubResource("StandardMaterial3D_0xm2m")
+mesh = SubResource("BoxMesh_7dm0k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=996840216]
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=535107240]
+script = ExtResource("1_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=889490218]
+shape = SubResource("CapsuleShape3D_h2yge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1062669153]
+material_override = SubResource("StandardMaterial3D_ig7tw")
+mesh = SubResource("CapsuleMesh_0xm2m")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1556729629]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 3, 6)
+
+[node name="Enemy" type="StaticBody3D" parent="." unique_id=2063890011]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=1466567486]
+shape = SubResource("CapsuleShape3D_lquwl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=193688123]
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("CapsuleMesh_1bvp3")
