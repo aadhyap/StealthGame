@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ctmq6e3e7ki2u"]
 
 [ext_resource type="Script" uid="uid://e7caj6ovdxdj" path="res://player.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://2uuiur1ry2vn" path="res://enemy.gd" id="2_0xm2m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
 albedo_color = Color(0, 0, 0, 1)
@@ -11,12 +12,25 @@ size = Vector3(30, 0.2, 30)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
 size = Vector3(30, 0.2, 30)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+albedo_color = Color(0.8862745, 0.38431373, 0.87058824, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1snde"]
+material = SubResource("StandardMaterial3D_ig7tw")
+height = 0.05
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h2yge"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
 albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0xm2m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_se3am"]
+albedo_color = Color(1, 0.15294118, 0.8980392, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1snde"]
+size = Vector3(0.2, 0.2, 0.6)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lquwl"]
 
@@ -39,22 +53,55 @@ shape = SubResource("BoxShape3D_ig7tw")
 [node name="Player" type="CharacterBody3D" parent="." unique_id=535107240]
 script = ExtResource("1_ig7tw")
 
+[node name="SubmergedMarker" type="MeshInstance3D" parent="Player" unique_id=1167376305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3327639, 0)
+mesh = SubResource("CylinderMesh_1snde")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=889490218]
 shape = SubResource("CapsuleShape3D_h2yge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1062669153]
-material_override = SubResource("StandardMaterial3D_ig7tw")
+material_override = SubResource("StandardMaterial3D_1bvp3")
 mesh = SubResource("CapsuleMesh_0xm2m")
 
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=1556729629]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 3, 6)
 
-[node name="Enemy" type="StaticBody3D" parent="." unique_id=2063890011]
+[node name="DirectionMarker" type="MeshInstance3D" parent="Player" unique_id=400610757]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5040326, -0.6)
+material_override = SubResource("StandardMaterial3D_se3am")
+mesh = SubResource("BoxMesh_1snde")
+
+[node name="Enemy" type="CharacterBody3D" parent="." unique_id=962995953 groups=["enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
+script = ExtResource("2_0xm2m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=1466567486]
 shape = SubResource("CapsuleShape3D_lquwl")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=193688123]
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("CapsuleMesh_1bvp3")
+
+[node name="Enemy2" type="CharacterBody3D" parent="." unique_id=2027596850 groups=["enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.860447, 1, -2.7385132)
+script = ExtResource("2_0xm2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy2" unique_id=1981599599]
+shape = SubResource("CapsuleShape3D_lquwl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy2" unique_id=43198987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0569191)
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("CapsuleMesh_1bvp3")
+
+[node name="Enemy3" type="CharacterBody3D" parent="." unique_id=1805035177 groups=["enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2582407, 1, 3.43618)
+script = ExtResource("2_0xm2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy3" unique_id=1559627563]
+shape = SubResource("CapsuleShape3D_lquwl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy3" unique_id=1856707389]
 material_override = SubResource("StandardMaterial3D_h2yge")
 mesh = SubResource("CapsuleMesh_1bvp3")
